@@ -1,56 +1,42 @@
-# Welcome to your Expo app 👋
+🚀 Visão Geral do Projeto
+O AdivinhaVerse foi projetado para oferecer uma experiência de jogo fluida, leve e responsiva. O sistema desafia o usuário a descobrir um número gerado aleatoriamente, fornecendo dicas visuais instantâneas:
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+🟢 Verde: Quando o palpite indica que o número secreto é maior (ou em caso de vitória/acerto).
 
-## Get started
+🔴 Vermelho: Quando o palpite indica que o número secreto é menor.
 
-1. Install dependencies
+🛠️ Prompts e Histórico de Refatoração
+Durante o ciclo de desenvolvimento, evolução e refinamento da arquitetura do aplicativo, os seguintes prompts e diretrizes técnicas foram utilizados para otimizar o código, corrigir dependências e ajustar a interface:
 
-   ```bash
-   npm install
-   ```
+1. Configuração e Conexão com o Firebase
+Prompt utilizado:
+"Configure a conexão com o Firebase utilizando o arquivo firebaseConfig.js com persistência de sessão e Firestore integrados de forma universal para React Native, prevenindo erros de inicialização duplicada (duplicate-app)."
 
-2. Start the app
+Ajustes realizados: Implementação da verificação de instâncias existentes (getApps().length === 0) e configuração robusta do Firestore e Auth com suporte ao AsyncStorage.
 
-   ```bash
-   npx expo start
-   ```
+2. Estilização Nativa e Modo Escuro (Dark Mode)
+Prompt utilizado:
+"Refatore o layout do componente principal (index.tsx) para operar exclusivamente em modo escuro profundo, substituindo propriedades incompatíveis e garantindo alta performance nativa sem dependências de estilização externas."
 
-In the output, you'll find options to open the app in a
+Ajustes realizados: Aplicação de uma paleta de cores consistente baseada em tons de azul escuro e chumbo (#0B0F19 e #131C2E), garantindo legibilidade e contraste adequado para ambientes com pouca luz.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+3. Mecânica do Jogo e Feedback Visual por Cores
+Prompt utilizado:
+"Ajuste a lógica de validação de palpites para comparar o número inserido com o número sorteado (Math.floor(Math.random() * 100) + 1), alterando dinamicamente a cor da dica visual para verde quando o número alvo for maior e vermelho quando for menor."
 
-You can start developing by editing the files inside the **src/app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+Ajustes realizados: Criação de estados reativos para a cor da dica (corDica), tratamento de entradas inválidas e validação em tempo real das tentativas do jogador.
 
-## Get a fresh project
+4. Integração do Ranking Global em Tempo Real
+Prompt utilizado:
+"Implemente a listagem de ranking utilizando escuta em tempo real (onSnapshot) do Firestore, ordenando os jogadores pelo menor número de tentativas de forma otimizada para dispositivos móveis."
 
-When you're ready, run:
+Ajustes realizados: Conexão da coleção de pontuações (ranking_jogo) utilizando consultas ordenadas (orderBy, limit) para exibir o top 10 de forma instantânea na interface.
 
-```bash
-npm run reset-project
-```
+📱 Tecnologias Utilizadas
+React Native / Expo
 
-This command will move the starter code to the **example** directory and create a blank **src/app** directory where you can start developing.
+TypeScript
 
-### Other setup steps
+Firebase Firestore (Banco de dados em tempo real)
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+AsyncStorage (Persistência local)
